@@ -68,3 +68,45 @@ layout.generate_layout()
 print(" 打印所有标题")
 # 打印所有标题
 # layout.print_all_headings()
+
+
+
+# class OperatorWord:
+#     def __init__(self, filepath):
+#         self.doc = Document(filepath)
+
+#     def get_title(self):
+#         # 假设文档的第一个段落是标题
+#         return self.doc.paragraphs[0].text
+
+#     def get_paragraphs(self):
+#         # 获取所有段落的文本
+#         return [para.text for para in self.doc.paragraphs]
+
+#     def get_headings(self, level=None):
+#         # 获取指定级别的标题，如果level为None，则获取所有级别的标题
+#         headings = []
+#         for para in self.doc.paragraphs:
+#             if para.style.name.startswith('Heading'):
+#                 heading_level = int(para.style.name.split(' ')[-1])
+#                 if level is None or heading_level == level:
+#                     headings.append((heading_level, para.text))
+#         return headings
+
+#     def convert_headings_to_markdown(self, level=None):
+#         # 将标题转换为Markdown格式
+#         headings = self.get_headings(level)
+#         markdown_headings = []
+#         for heading_level, heading_text in headings:
+#             markdown_headings.append('#' * heading_level + ' ' + heading_text)
+#         return '\n'.join(markdown_headings)
+
+# path = "C:\\Users\\v_mhzhou\\Documents\\WeChat Files\\wxid_kqrhl110fkr822\\FileStorage\\File\\2023-09\\尚硅谷大数据技术之高频面试题9.1.3.docx"
+
+# reader = OperatorWord(path)
+# # print('Title:', reader.get_title())
+# # print('Paragraphs:', reader.get_paragraphs())
+# # print('Headings:', reader.get_headings())
+# # print('Headings in Markdown: \n', reader.convert_headings_to_markdown())
+
+# print(reader.convert_headings_to_markdown())
