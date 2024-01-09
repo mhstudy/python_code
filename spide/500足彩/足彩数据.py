@@ -52,7 +52,7 @@ class FootBallOdd:
         """
         # 设置默认请求头
         self.headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         }
         # 创建 requests.Session 对象
         self.session = requests.Session()
@@ -615,25 +615,26 @@ def write_football_data_to_mysql_1d(date_time=None):
 
 # 获取n天的数据
 def write_football_data_to_mysql_nd(start_time, end_time):
-    # 写法一: 此写法从性能角度来看是最好的。
-    # 创建FootBallOdd实例
-    football_odd = FootBallOdd()
-
-    # 创建DataUtils实例，并连接到MySQL
-    data_utils = DataUtils(user='root', password='000000', database='football')
-
-    # 生成起始时间和结束时间之间的日期列表
-    date_list = DataUtils.get_date_range(start_time, end_time)
-    for date_time in date_list:
-        result_list = football_odd.get_wangchang_odds(date_time)
-        # 将数据插入到MySQL表中
-        data_utils.insert_data(table_name='football_odd_data', data_list=result_list)
-
-    # # 写法二:
+    # # 写法一: 此写法从性能角度来看是最好的。
+    # # 创建FootBallOdd实例
+    # football_odd = FootBallOdd()
+    #
+    # # 创建DataUtils实例，并连接到MySQL
+    # data_utils = DataUtils(user='root', password='000000', database='football')
+    #
     # # 生成起始时间和结束时间之间的日期列表
     # date_list = DataUtils.get_date_range(start_time, end_time)
     # for date_time in date_list:
-    #     write_football_data_to_mysql_1d(date_time)
+    #     result_list = football_odd.get_wangchang_odds(date_time)
+    #     # 将数据插入到MySQL表中
+    #     data_utils.insert_data(table_name='football_odd_data', data_list=result_list)
+
+    # 写法二:
+    # 生成起始时间和结束时间之间的日期列表
+    date_list = DataUtils.get_date_range(start_time, end_time)
+    for date_time in date_list:
+        write_football_data_to_mysql_1d(date_time)
+
 
 # 写入数据到csv文件
 def write_football_date_to_csv_1d(football_odd: FootBallOdd, date_time=None, file_name='test.csv', mode='w'):
@@ -642,7 +643,7 @@ def write_football_date_to_csv_1d(football_odd: FootBallOdd, date_time=None, fil
 
 
 if __name__ == '__main__':
-    write_football_data_to_mysql_nd(20230805, 20230807)
+    write_football_data_to_mysql_nd(20230916, 20240108)
 
     # 写入csv文件
     # football_odd = FootBallOdd()
