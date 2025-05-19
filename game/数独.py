@@ -54,30 +54,20 @@ def print_board(board):
         print()
 
 
-# 测试数独题目
-sudoku_board = [
+sudoku_board = []
+with open('数独.csv', newline='', encoding='utf-8') as csvfile:
+    reader = csv.reader(csvfile)
+    for row in reader:
+        # 把每一行的字符串数字转换成整数列表
+        int_row = [int(num) for num in row]
+        sudoku_board.append(int_row)
 
-    [0, 0, 0, 0, 5, 0, 0, 0, 2],
-    [2, 4, 0, 9, 0, 0, 0, 8, 0],
-    [0, 0, 1, 0, 0, 0, 0, 0, 0],
-    [0, 3, 0, 2, 0, 4, 0, 9, 6],
-    [0, 1, 0, 0, 0, 0, 4, 0, 0],
-    [0, 0, 0, 0, 0, 9, 0, 2, 0],
-    [0, 0, 0, 1, 0, 0, 6, 0, 0],
-    [0, 0, 0, 4, 9, 0, 0, 0, 5],
-    [8, 0, 3, 0, 0, 6, 0, 0, 0]
 
-    # [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    # [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    # [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    # [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    # [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    # [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    # [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    # [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    # [0, 0, 0, 0, 0, 0, 0, 0, 0]
-
-]
+if solve_sudoku(sudoku_board):
+    print("数独已解，结果如下:")
+    print_board(sudoku_board)
+else:
+    print("无解")
 
 if solve_sudoku(sudoku_board):
     print("数独已解，结果如下:")
